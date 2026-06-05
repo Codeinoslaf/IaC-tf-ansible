@@ -3,3 +3,8 @@
 /terraform/terraform.tfstate.backup
 /terraform/terraform.tfvars
 /terraform/.terraform.lock.hcl
+
+.vscode/
+.git
+
+/ansible/inventory.ini

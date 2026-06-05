@@ -24,9 +24,17 @@ variable "sg_id" {
   description = "ID Security Group для машины"
 }
 
-
 variable "ssh_key_path" {
   type        = string
   default     = "~/.ssh/ssh-terr.pub"
   description = "Путь до публичного SSH-ключа (передаётся в метаданные ВМ)"
+}
+
+variable "ssh_private_key_path" {
+  default = "~/.ssh/ssh-terr"
+  description = "Путь до приватного SSH-ключа"
+}
+
+variable "vm_user" {
+  default = "ubuntu"
 }

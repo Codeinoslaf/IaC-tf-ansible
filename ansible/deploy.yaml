@@ -1,0 +1,18 @@
+---
+- name: Подготовка сервера для common_nodes
+  hosts: common_nodes
+  become: yes
+  gather_facts: false
+
+  roles:
+    - common
+
+
+- name: Подготовка веб-сервера для nginx_nodes
+  hosts: nginx_nodes
+  become: yes
+  gather_facts: false
+
+  roles:
+    - common
+    - nginx

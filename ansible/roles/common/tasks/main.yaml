@@ -1,0 +1,25 @@
+---
+- name: Ждем, пока виртуалка станет доступна по SSH
+  wait_for_connection:
+    delay: 5
+    timeout: 300
+
+- name: Собираем факты о системе
+  setup:
+
+- name: Устанавливаем базовые пакеты
+  apt:
+    update_cache: yes
+
+- name: Создаем группу deploy
+  group:
+    name: deploy
+    state: present
+
+- name: Создаем пользователя deploy
+  user:
+    name: deploy
+    group: deploy
+    shell: /bin/bash
+    create_home: yes
+    state: present

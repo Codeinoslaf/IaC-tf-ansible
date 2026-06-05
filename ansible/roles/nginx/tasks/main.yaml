@@ -1,0 +1,35 @@
+---
+- name: Устанавливаем веб-сервер Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Деплоим index.html из шаблона
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: deploy
+    group: deploy
+    mode: '0644'
+
+- name: Кладем конфиг нашего сайта в sites-available
+  template:
+    src: myapp.conf.j2
+    dest: /etc/nginx/sites-available/myapp.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Reload Nginx
+
+- name: Прокидываем симлинк в sites-enabled
+  file:
+    src: /etc/nginx/sites-available/myapp.conf
+    dest: /etc/nginx/sites-enabled/myapp.conf
+    state: link
+  notify: Reload Nginx
+
+- name: Удаляем дефолтный конфиг Nginx (чтобы не перехватывал трафик)
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Reload Nginx
