@@ -39,7 +39,6 @@ export YC_FOLDER_ID=$(yc config get folder-id)
 cd terraform/
 terraform init
 terraform apply
-Нажмите yes при запросе подтверждения. После успешного выполнения Terraform автоматически создаст файл inventory.ini в папке Ansible.
 ```
 
 3. Настройка серверов (Ansible)
@@ -47,7 +46,7 @@ terraform apply
 
 ```Bash
 cd ../ansible/
-ansible-playbook -i inventory.ini deploy.yaml
+ansible-playbook deploy.yaml
 ```
 📁 Структура проекта
 
